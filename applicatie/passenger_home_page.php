@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="css/mijncss.css">
 
     <meta charset="utf-8">
-    <title>gelre airport landing</title>
+    <title>gelre airport passenge page</title>
   </head>
   <body>
     <header class = "header">
@@ -83,39 +83,71 @@
   </header>
 
     <main>
-        <div class = "animation">
         <div class = "companyNameUnderHeader">
             <h1>
-                Gelre Airport
+              Gelre Airport
             </h1>
-
         </div>
-        </div>
-
-
-        <div  class = "grid-buttons">
-            <a  href = "passenger_home_page.php" class = "individual-grid-button">
-                log in als passagier
-            </a>
-
-            <a  href = "medewerker_home_page.php" class = "individual-grid-button">
-                log in als medewerker
-            </a>
-        </div>
-      
-      <div class = "textbox">
         
-        <h2>
-            zoek een vlucht
-        </h2>
+        <div class = "textbox">
+            <h2>
+                Mijn vluchten
+            </h2>
+            <div class = "individual-flight-box">
 
-        <form action="search_flight" method="post">
-            <input type="number" placeholder="vluchtnummer" class = "inputtextbox" required>
+                <h2>
+                    Gelre airport to Twente airport
+                </h2>
+
+                <div class = "flex-container">
+                    <div class = "indiv-flex">
+                        <h2>
+                            16:23
+                        </h2>
+                    </div>
+                    <div class = "indiv-flex">
+                        <h2>
+                            01-01-2000
+                        </h2>
+                    </div>       
+                </div>
+
+                <h2>
+                    Op schema
+                </h2>
+
+                <div class = "grid-buttons">
+                    <a  href = "vlucht-details.php" class = "button-flight-details">
+                            meer informatie
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class = "textbox">
+            <h2>
+                koffers inchecken
+            </h2>
+
+            <p>
+                alstublieft uw koffers individueel inchecken
+            </p>
+            <form action="checking_baggage_passagier" method="get">
+                <div class = "flex-container">
+                    <div class = "indiv-flex">
+                        <input type = "number" placeholder="hoeveelheid kilogram" class = "inputtextbox" required>
+                    </div>
+
+                    <div class = "indiv-flex">
+                        <button class = "inputtextbox">check koffer in</button>
+                    </div>
+            
+                </div>
+            <!--aangeven gewicht, aangeven passagiersnummer niet nodig => al ingelogd-->
+            </form>
+        </div>
         
-            <button type = "submit" class = "inputtextbox">submit</button>
-        </form>
-      </div>
-
     </main>
 
 

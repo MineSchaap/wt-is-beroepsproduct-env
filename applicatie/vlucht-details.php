@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="css/mijncss.css">
 
     <meta charset="utf-8">
-    <title>gelre airport landing</title>
+    <title>gelre airport medewerker page</title>
   </head>
   <body>
     <header class = "header">
@@ -83,38 +83,41 @@
   </header>
 
     <main>
-        <div class = "animation">
-        <div class = "companyNameUnderHeader">
-            <h1>
-                Gelre Airport
-            </h1>
-
-        </div>
-        </div>
-
-
-        <div  class = "grid-buttons">
-            <a  href = "passenger_home_page.php" class = "individual-grid-button">
-                log in als passagier
-            </a>
-
-            <a  href = "medewerker_home_page.php" class = "individual-grid-button">
-                log in als medewerker
-            </a>
-        </div>
-      
-      <div class = "textbox">
-        
-        <h2>
-            zoek een vlucht
-        </h2>
-
-        <form action="search_flight" method="post">
-            <input type="number" placeholder="vluchtnummer" class = "inputtextbox" required>
-        
-            <button type = "submit" class = "inputtextbox">submit</button>
-        </form>
+      <div class = "companyNameUnderHeader">
+        <h1>
+          Gelre Airport
+        </h1>
       </div>
+
+
+      <div class = "vlucht-details-box">
+            <h2>
+                Gelre airport to Twente airport
+            </h2>
+
+            <p>
+                Denim Air, XR
+            </p>
+
+            <p>
+                16:23
+            </p>
+            <p>
+                01-01-2000
+            </p>
+
+            <p>
+                Op schema
+            </p>
+
+            <p>
+                gate D
+            </p>
+
+            <p>
+                Nog 5 plaatsen over
+            </p>
+        </div>
 
     </main>
 

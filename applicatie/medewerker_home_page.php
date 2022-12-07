@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    
+    <link rel="stylesheet" href="css/mijncss.css">
+
+    <meta charset="utf-8">
+    <title>gelre airport medewerker page</title>
+  </head>
+  <body>
+    <header class = "header">
+      <div class = "flex-container">
+
+          <a href = "index.php">
+              <div class = "indiv-flex"  style="flex-grow: 1">
+                  <h2>
+                      gelre airport
+                  </h2>
+              </div>
+          </a>
+
+          <div class = "flex-container" style="flex-grow: 2">
+
+            <a href="medewerker_home_page.php">
+                    <div class = "indiv-flex">
+                    <h2>
+                        inloggen als medewerker
+                    </h2>
+                </div>
+            </a>
+
+            <a href="passenger_home_page.php">
+                <div class = "indiv-flex">
+                    <h2>
+                        inloggen als passagier
+                    </h2>
+                </div>
+            </a>
+
+            <a href="vluchten_overzicht_page.php">
+                <div class = "indiv-flex">
+                    <h2>
+                        overzicht vluchten
+                    </h2>
+                </div>
+            </a>
+
+            <a href="index.php">
+                <div class = "indiv-flex">
+                    <h2>
+                        lorem ipsum
+                    </h2>
+                </div>
+            </a>
+
+            <a href="index.php">
+                <div class = "indiv-flex">
+                    <h2>
+                        lorem ipsum
+                    </h2>
+                </div>
+            </a>
+
+            <a href="index.php">
+                <div class = "indiv-flex">
+                    <h2>
+                        lorem ipsum
+                    </h2>
+                </div>
+            </a>
+
+          </div>
+
+          <div class = "indiv-flex" style="flex-grow: 2">
+                  
+              <form action = "search" method = "get">
+                  <input type="text" placeholder="Search.." name="search" required>
+                  <button type="submit">submit</button>
+              </form>
+          </div>
+
+    </div>
+</header>
+
+    <main>
+      <div class = "companyNameUnderHeader">
+        <h1>
+          Gelre Airport
+        </h1>
+      </div>
+      
+        <div class = "grid-buttons">
+          <a href = "vluchten_overzicht_page.php" class = "individual-grid-button">
+              naar vluchtenoverzicht
+          </a>
+        </div>
+
+      <div class="textbox">
+
+        <!--
+          bagage inchecken
+          pasagiernummer, objectvolgnummer
+          de passagier weegt thuis, een medewerker controleertd gegevens:
+          vult in passagiernummer en volgnummer en krijgt het gewicht en of het bestaat
+
+        -->
+
+        <h2>
+          bagage inchecken
+        </h2>
+
+        <form  action="checkin_baggage_medewerker" method="get">
+          <div class = "flex-container">
+            <div class = "indiv-flex">
+              <input type = "number" placeholder="passagiersnummer" class = "inputtextbox"  required>
+            </div>
+
+            <div class = "indiv-flex">
+              <input type = "number" placeholder="volgnummer bagage" class = "inputtextbox" required>
+            </div>
+
+            <div class = "indiv-flex">
+              <input type = "number" placeholder="aantal kilogram" class = "inputtextbox" required>
+            </div>
+        
+            </div>
+          <button class = "inputtextbox">check koffer in</button>
+        </form>
+      </div>
+
+      <div class = "textbox">
+        
+        <h2>
+            zoek een vlucht
+        </h2>
+
+        <form action="checkin_baggage_medewerker" method="get">
+          <input type = "number" placeholder="vluchtnummer" class = "inputtextbox" required>
+        
+          <button class = "inputtextbox">submit</button>
+        </form>
+
+      </div>
+
+
+
+
+      <div class = "textbox"><!--nieuwe vlucht invoeren-->
+
+        <!--
+           bestemming, vertrektijd, gatecode, max aantal, max gewicht pp      
+        -->
+        <h2>
+          Voer een nieuwe vlucht in
+        </h2>
+
+        <form action="new_flight" method="get">
+        <div class = "flex-container">
+          <div class = "indiv-flex">
+            <input type = "text" placeholder="bestemming" class = "inputtextbox" required>
+          </div>
+          <div class = "indiv-flex">
+            <input type = "number" placeholder="gatecode" class = "inputtextbox" required>
+          </div>       
+        </div>
+
+        <div class = "flex-container">
+          <div class = "indiv-flex">
+            <input type = "number" placeholder="max aantal" class = "inputtextbox">
+          </div>
+
+          <div class = "indiv-flex">
+            <input type = "number" placeholder="max gewicht per persoon" class = "inputtextbox">
+          </div>       
+        </div>
+
+          <label for="vertrektijd">vertrektijd:</label>
+          <input type="datetime-local" id="vertrektijd" name="vertrektijd" class = "inputtextbox" required>
+
+        <button class = "inputtextbox">submit</button>
+        </form>
+
+      </div>
+
+
+
+
+
+
+      <div class = "textbox"><!--nieuwe passagier -->
+
+        <!--
+          naam, vlucht, geslacht
+        -->
+        <h2>
+          Voer een nieuwe passagier in
+        </h2>
+
+        <form action="new_passenger" method="get">
+          <div class = "flex-container">
+            <div class = "indiv-flex">
+              <input type = "text" placeholder="naam" class = "inputtextbox" required>
+            </div>
+
+            <div class = "indiv-flex">
+              <input type = "text" placeholder="vlucht bagage" class = "inputtextbox" required>
+            </div>
+
+            <div class = "indiv-flex">
+              <select id="geslacht" name="geslacht-list" class = "inputtextbox">
+                <option value="man">man</option>
+                <option value="vrouw">vrouw</option>
+              </select>
+            </div>
+          </div>
+
+          <button class = "inputtextbox">submit</button>
+        </form>
+      </div>
+
+    </main>
+
+
+
+    <footer>
+      <div class = "flex-container">
+          <div class = "indiv-flex">
+              <h2>
+                  contact us
+              </h2>
+
+              <div class = "flex-container">
+                  <div class = "indiv-flex">
+                      <h3>
+                          email-adres
+                      </h3>
+                      <p>
+                          us@gmail.com
+                      </p>
+                  </div>
+
+                  <div class = "indiv-flex">
+                      <h3>
+                          telefoonnummer
+                      </h3>
+                      <p>
+                          0314-000000
+                      </p>
+                  </div>
+
+                  <div class = "indiv-flex">
+                      <h3>
+                          adres
+                      </h3>
+                      <p>
+                          ruitenberglaan 26 arnhem
+                      </p>
+                  </div>
+              </div>
+
+          </div>
+
+          <div class = "indiv-flex">
+              <h3>information</h3>
+              <p>about us</p>
+
+              <a href = "privacyverklaring.php">
+                  <p>privacy policy</p>
+              </a>
+              
+              
+              <p>contact us</p>
+
+
+
+          </div>
+      </div>
+
+      <p>
+          copyright 2022 Gelre Airport
+      </p>
+  </footer>
+
+  </body>
+</html>

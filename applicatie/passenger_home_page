@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    
+    <link rel="stylesheet" href="css/mijncss.css">
+
+    <meta charset="utf-8">
+    <title>gelre airport passenge page</title>
+  </head>
+  <body>
+    <header class = "header">
+      <ul>
+        <li><a href="default.asp">Home</a></li>
+        <li><a href="news.asp">Vluchten</a></li>
+        <li><a href="contact.asp">Contact</a></li>
+        <li><a href="about.asp">Over ons</a></li>
+      </ul>
+    </header>
+
+    <main>
+        <div class = "companyNameUnderHeader">
+            <h1>
+              Gelre Airport
+            </h1>
+        </div>
+
+        
+    </main>
+
+
+
+    <footer>
+      <p>dit is mijn pagina</p>
+    </footer>
+
+  </body>
+</html>

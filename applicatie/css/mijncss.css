@@ -1,0 +1,305 @@
+  
+  body{
+    margin: 0px;
+    background-color: #DDDDDD;
+    min-height: 100vh;/*to make footer not be in middle of viewport*/
+  }
+
+  a{
+    text-decoration: none;
+  }
+
+  html{
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  footer{
+    position: sticky;
+		top: 100vh;/*maek footer stick to bottom*/
+  }
+
+  .header{
+    background-color: #7fffd4;
+    padding:0;
+    text-align: center;
+    width: 100%;
+    white-space: nowrap;
+  }
+
+
+  @media only screen and (max-width: 1251px) {
+    .header .flex-container{
+      flex-direction: column;
+    }
+  }
+
+  .header ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+    .header li{
+    display: inline;
+    float: left;
+  }
+
+  .header a{
+    display: block;
+    text-decoration: none;
+    color: black;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .header form{
+    height: 100%;
+  }
+
+  .header form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .header .flex-container{
+    justify-content: space-between;
+  }
+
+  .header h2{
+    font-size: 1rem;
+  }
+
+  .header img{
+    vertical-align: middle;
+  }
+
+  .header li:hover{
+    background-color: #5dddb2;
+    cursor: pointer;
+  }  
+  
+  .header a:hover{
+    background-color: #5dddb2;
+    cursor: pointer;
+  }
+
+  .textbox {
+    background-color: aquamarine;
+    width: 40%;
+    margin: auto;
+    text-align: center;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    margin-bottom: 4%;
+    margin-top: 4%;
+    min-width: 300px;
+  }
+
+  .textbox h2{
+    padding: 2%;
+    margin:auto;
+    font-size: 300%;
+  }
+
+  .inputtextbox{
+    width: 80%;
+    height: 50px;
+    margin: 2%;
+  }
+
+  .textbox button:hover{
+    background-color: #DaDaDa;
+    cursor: pointer;
+  }
+
+  .textbox button{
+    border-width: 0px;
+    border-radius: 25px;
+  }
+
+
+  .companyNameUnderHeader h1{
+    text-align: center;
+    font-size: 600%;
+
+  }
+
+  .companyNameUnderHeader{
+    animation-name: slide-right;
+    animation-duration: 4s;
+  }
+
+
+  .animation {
+    animation-name: slide-right;
+    animation-duration: 4s;
+    white-space: nowrap;
+  }
+  
+  @keyframes slide-right {
+    from {
+      margin-left: 100%;
+    }
+    to {
+      margin-left: 0px;
+    }
+  }
+
+  .companyNameUnderHeader{
+    animation: mymove 5s infinite ease-out;
+  }
+
+
+  
+  @media only screen and (max-width: 600px) {
+    .companyNameUnderHeader h1 {
+      font-size: 40px;
+      text-align: center;
+    }
+  }
+
+  .grid-buttons{
+    margin: auto;
+    text-align: center;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    display: flex;
+    justify-content: center;
+  }
+
+
+  .individual-grid-button{
+    background-color: aquamarine;
+    width: 80%;
+    height: 50px;
+    border-radius: 25px;
+    border-width: 0px;
+    text-align: center;
+    color: black;
+    vertical-align: middle;
+    margin: auto;
+    margin-left: 5%;
+    margin-right: 5%;
+    max-width: 300px;
+
+  }
+
+
+
+  .individual-grid-button:hover{
+    background-color: #5dddb2;
+    cursor: pointer;
+  }
+
+  .button-flight-details{
+    background-color: white;
+    width: 80%;
+    height: 50px;
+    border-radius: 25px;
+    border-width: 0px;
+    text-align: center;
+    color: black;
+    vertical-align: middle;
+    margin: auto;
+    margin-left: 5%;
+    margin-right: 5%;
+    max-width: 300px;
+
+  }
+
+  .button-flight-details:hover{
+    background-color: #DDDDDD;
+    cursor: pointer;
+  }
+
+  
+  @media only screen and (max-width: 600px) {
+    .individual-grid-button{
+      width: 10rem;
+    }
+  }
+
+  .individual-flight-box{
+    border-style: solid;
+    border-width: 2px;
+    margin: 2%;
+  }
+
+  .individual-flight-box button{
+    background-color: white;
+    width: 80%;
+    height: 50px;
+    margin: 2%;
+    border-width: 0px;
+  }
+
+  .individual-flight-box button:hover{
+    background-color: #DDDDDD;
+  }
+
+  .flex-container{
+    display: flex;
+  }
+
+  .indiv-flex{
+    flex: 1;
+  }
+
+  .centered-button{
+    margin: auto;
+    text-align: center;
+    margin-top: 2%;
+    margin-bottom: 2%;
+  }
+
+  .vlucht-details-box{
+    background-color: aquamarine;
+    width: 60%;
+    margin: auto;
+    text-align: center;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    margin-bottom: 7%;
+    margin-top: 7%;
+    min-width: 300px;
+  }
+
+  .vlucht-details-box p{
+    font-size: 200%;
+  }
+
+  .vlucht-details-box h2{
+    font-size: 200%;
+  }
+
+  .flightsorting{
+    text-align:center;
+  }
+
+
+  .flightsorting select{
+    width: 20%;
+    height: 50px;
+    text-align: center;
+    background-color:#7fffd4;
+    stroke-width:0%;
+    border-radius:36px;
+    display:inline-block;
+    overflow:hidden;
+    min-width: 200px;
+  }
+
+  footer {
+    text-align: center;
+    background-color:#7fffd4;
+    white-space: nowrap;
+  }
+
+  footer p{
+    margin-bottom: 0;
+  }
+
+  
