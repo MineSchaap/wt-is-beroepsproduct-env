@@ -1,3 +1,46 @@
+<?php
+session_start();
+require_once 'db_connectie.php';
+require_once 'components/headerFooter.php';
+
+// maak verbinding met de database (zie db_connection.php)
+//many warnings when the db doesn't return anything
+$db = maakVerbinding();
+
+if(isset($_POST['vluchtnummer'])){
+    $vluchtnummer = $_POST['vluchtnummer'];
+}
+else{
+    echo '<h1> geen vluchtnummer gegeven</h1>';
+    return;
+}
+
+$sql = 'select luchthaven.naam AS luchthaven_naam, Maatschappij.maatschappijcode as maatschappij_maatschappijcode, maatschappij.naam as maatschappij_naam, vluchtnummer, gatecode, vertrektijd, (select max_aantal from Vlucht where vluchtnummer='.$vluchtnummer.') - (select count(*) from Passagier where vluchtnummer='.$vluchtnummer.') as plaatsen_over
+from Vlucht, luchthaven, Maatschappij
+where Luchthaven.luchthavencode = Vlucht.bestemming
+and vlucht.maatschappijcode = Maatschappij.maatschappijcode
+and vluchtnummer = ' . $vluchtnummer;//sql query
+
+
+$data = $db->query($sql);
+$rij = $data->fetch();
+
+if(!isset($rij))return;
+
+if(empty($rij)){ 
+  echo '<h1> geen geldig vluchtnummer </h1>'; 
+  return;
+}
+
+$bestemming = 'naar ' . $rij['luchthaven_naam'];
+$maatschappij = $rij['maatschappij_naam'] . ', ' . $rij ['maatschappij_maatschappijcode'];
+$vertrektijd = $rij['vertrektijd'];
+$datum = date_format(date_create($vertrektijd),"Y-m-d");
+$tijd = date_format(date_create($vertrektijd),"H:i");
+$gateCode = 'gate  ' . $rij['gatecode'];
+$plaatsenOver = 'Nog ' . $rij['plaatsen_over'] . ' plaatsen over';
+?>
+
 <!DOCTYPE html>
 <html lang="nl">
   <head>
@@ -8,79 +51,7 @@
     <title>gelre airport medewerker page</title>
   </head>
   <body>
-    <header class = "header">
-        <div class = "flex-container">
-
-            <a href = "index.php">
-                <div class = "indiv-flex"  style="flex-grow: 1">
-                    <h2>
-                        gelre airport
-                    </h2>
-                </div>
-            </a>
-
-            <div class = "flex-container" style="flex-grow: 2">
-
-              <a href="medewerker_home_page.php">
-                      <div class = "indiv-flex">
-                      <h2>
-                          inloggen als medewerker
-                      </h2>
-                  </div>
-              </a>
-
-              <a href="passenger_home_page.php">
-                  <div class = "indiv-flex">
-                      <h2>
-                          inloggen als passagier
-                      </h2>
-                  </div>
-              </a>
-
-              <a href="vluchten_overzicht_page.php">
-                  <div class = "indiv-flex">
-                      <h2>
-                          overzicht vluchten
-                      </h2>
-                  </div>
-              </a>
-
-              <a href="index.php">
-                  <div class = "indiv-flex">
-                      <h2>
-                          lorem ipsum
-                      </h2>
-                  </div>
-              </a>
-
-              <a href="index.php">
-                  <div class = "indiv-flex">
-                      <h2>
-                          lorem ipsum
-                      </h2>
-                  </div>
-              </a>
-
-              <a href="index.php">
-                  <div class = "indiv-flex">
-                      <h2>
-                          lorem ipsum
-                      </h2>
-                  </div>
-              </a>
-
-            </div>
-
-            <div class = "indiv-flex" style="flex-grow: 2">
-                    
-                <form action = "search" method = "get">
-                    <input type="text" placeholder="Search.." name="search" required>
-                    <button type="submit">submit</button>
-                </form>
-            </div>
-
-      </div>
-  </header>
+    <?php echo getHeader(); ?>
 
     <main>
       <div class = "companyNameUnderHeader">
@@ -92,18 +63,18 @@
 
       <div class = "vlucht-details-box">
             <h2>
-                Gelre airport to Twente airport
+                <?= $bestemming ?>
             </h2>
 
             <p>
-                Denim Air, XR
+                <?= $maatschappij ?>
             </p>
 
             <p>
-                16:23
+            <?= $datum ?>
             </p>
             <p>
-                01-01-2000
+            <?= $tijd ?>
             </p>
 
             <p>
@@ -111,11 +82,11 @@
             </p>
 
             <p>
-                gate D
+                <?= $gateCode ?>
             </p>
 
             <p>
-                Nog 5 plaatsen over
+                <?= $plaatsenOver ?>
             </p>
         </div>
 
@@ -123,64 +94,7 @@
 
 
 
-    <footer>
-        <div class = "flex-container">
-            <div class = "indiv-flex">
-                <h2>
-                    contact us
-                </h2>
-
-                <div class = "flex-container">
-                    <div class = "indiv-flex">
-                        <h3>
-                            email-adres
-                        </h3>
-                        <p>
-                            us@gmail.com
-                        </p>
-                    </div>
-
-                    <div class = "indiv-flex">
-                        <h3>
-                            telefoonnummer
-                        </h3>
-                        <p>
-                            0314-000000
-                        </p>
-                    </div>
-
-                    <div class = "indiv-flex">
-                        <h3>
-                            adres
-                        </h3>
-                        <p>
-                            ruitenberglaan 26 arnhem
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class = "indiv-flex">
-                <h3>information</h3>
-                <p>about us</p>
-
-                <a href = "privacyverklaring.php">
-                    <p>privacy policy</p>
-                </a>
-                
-                
-                <p>contact us</p>
-
-
-
-            </div>
-        </div>
-
-        <p>
-            copyright 2022 Gelre Airport
-        </p>
-    </footer>
+    <?php echo getFooter(); ?>
 
   </body>
 </html>

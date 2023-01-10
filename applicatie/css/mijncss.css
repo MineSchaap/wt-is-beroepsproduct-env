@@ -104,6 +104,10 @@
     font-size: 300%;
   }
 
+  .textbox table {
+    width: 100%;
+  }
+
   .inputtextbox{
     width: 80%;
     height: 50px;
@@ -238,6 +242,18 @@
 
   .individual-flight-box button:hover{
     background-color: #DDDDDD;
+  }
+
+  @media only screen and (max-width: 2000px) {
+    .individual-flight-box h2{
+      font-size: 200%;
+    }
+  }
+
+  @media only screen and (max-width: 1000px) {
+    .individual-flight-box h2{
+      font-size: 100%;
+    }
   }
 
   .flex-container{

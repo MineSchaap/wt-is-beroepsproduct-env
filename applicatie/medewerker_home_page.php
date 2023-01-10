@@ -1,3 +1,35 @@
+<?php
+require_once 'components/headerFooter.php';
+require_once 'components/flightSearch.php';
+require_once 'db_connectie.php';
+
+session_start();
+
+if(!isset($_SESSION['loggedInAsMedewerker']) || !$_SESSION['loggedInAsMedewerker']){
+  header('location: medewerker_login.php');
+}
+
+if(true){//om de check of de inloggegevens kloppen te simuleren. medewerker krijgen meestal een wachtwoord en gebruikersnaam, ik heb alleen een knop.
+  $_SESSION['loggedInAsMedewerker'] = true;
+}
+
+function choices($sql){
+  $htmlString = '';
+
+  $db = maakVerbinding();
+
+  $data = $db->query($sql);
+
+
+//while($rij = $data->fetch()) {
+  foreach($data as $rij){
+    //<option value = "test">test</option>
+    $htmlString .= '<option value = "' . $rij['naam'] . '">' .  $rij['naam'] . '</option>';
+  } 
+  return $htmlString;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="nl">
   <head>
@@ -8,79 +40,7 @@
     <title>gelre airport medewerker page</title>
   </head>
   <body>
-    <header class = "header">
-      <div class = "flex-container">
-
-          <a href = "index.php">
-              <div class = "indiv-flex"  style="flex-grow: 1">
-                  <h2>
-                      gelre airport
-                  </h2>
-              </div>
-          </a>
-
-          <div class = "flex-container" style="flex-grow: 2">
-
-            <a href="medewerker_home_page.php">
-                    <div class = "indiv-flex">
-                    <h2>
-                        inloggen als medewerker
-                    </h2>
-                </div>
-            </a>
-
-            <a href="passenger_home_page.php">
-                <div class = "indiv-flex">
-                    <h2>
-                        inloggen als passagier
-                    </h2>
-                </div>
-            </a>
-
-            <a href="vluchten_overzicht_page.php">
-                <div class = "indiv-flex">
-                    <h2>
-                        overzicht vluchten
-                    </h2>
-                </div>
-            </a>
-
-            <a href="index.php">
-                <div class = "indiv-flex">
-                    <h2>
-                        lorem ipsum
-                    </h2>
-                </div>
-            </a>
-
-            <a href="index.php">
-                <div class = "indiv-flex">
-                    <h2>
-                        lorem ipsum
-                    </h2>
-                </div>
-            </a>
-
-            <a href="index.php">
-                <div class = "indiv-flex">
-                    <h2>
-                        lorem ipsum
-                    </h2>
-                </div>
-            </a>
-
-          </div>
-
-          <div class = "indiv-flex" style="flex-grow: 2">
-                  
-              <form action = "search" method = "get">
-                  <input type="text" placeholder="Search.." name="search" required>
-                  <button type="submit">submit</button>
-              </form>
-          </div>
-
-    </div>
-</header>
+    <?php echo getHeader(); ?>
 
     <main>
       <div class = "companyNameUnderHeader">
@@ -91,7 +51,7 @@
       
         <div class = "grid-buttons">
           <a href = "vluchten_overzicht_page.php" class = "individual-grid-button">
-              naar vluchtenoverzicht
+            naar vluchtenoverzicht
           </a>
         </div>
 
@@ -109,18 +69,14 @@
           bagage inchecken
         </h2>
 
-        <form  action="checkin_baggage_medewerker" method="get">
+        <form  action="components/handleMedewerkerNewBaggage.php" method="post">
           <div class = "flex-container">
             <div class = "indiv-flex">
-              <input type = "number" placeholder="passagiersnummer" class = "inputtextbox"  required>
+              <input type = "number" placeholder="passagiersnummer" class = "inputtextbox" name = "passenger_number" required>
             </div>
 
             <div class = "indiv-flex">
-              <input type = "number" placeholder="volgnummer bagage" class = "inputtextbox" required>
-            </div>
-
-            <div class = "indiv-flex">
-              <input type = "number" placeholder="aantal kilogram" class = "inputtextbox" required>
+              <input type = "number" placeholder="aantal kilogram" class = "inputtextbox" step = 0.01 name = "weight" required>
             </div>
         
             </div>
@@ -128,20 +84,9 @@
         </form>
       </div>
 
-      <div class = "textbox">
-        
-        <h2>
-            zoek een vlucht
-        </h2>
-
-        <form action="checkin_baggage_medewerker" method="get">
-          <input type = "number" placeholder="vluchtnummer" class = "inputtextbox" required>
-        
-          <button class = "inputtextbox">submit</button>
-        </form>
-
-      </div>
-
+      <?php
+      echo getFlightSearchBox();
+      ?>
 
 
 
@@ -154,33 +99,53 @@
           Voer een nieuwe vlucht in
         </h2>
 
-        <form action="new_flight" method="get">
+        <form action="components/handleNewFlight.php" method="post">
+          <div class = "flex-container">
+            <div class = "indiv-flex">
+
+              <label for="destination">bestemming:</label>
+              <select class = "inputtextbox" name = "destination" id = "destination" required>
+                <?php echo choices('select naam from Luchthaven'); ?>
+              </select>
+            </div>
+            <div class = "indiv-flex">
+              <label for="gate_code">gate nummer:</label>
+              <select class = "inputtextbox" name = "gate_code" id = "gate_code" required>
+                <?php echo choices('select gatecode as naam from gate'); ?>
+              </select>
+            </div>       
+          </div>
+
         <div class = "flex-container">
           <div class = "indiv-flex">
-            <input type = "text" placeholder="bestemming" class = "inputtextbox" required>
+            <label for="max_amount">aantal passagiers:</label>
+            <input type = "number" placeholder="max aantal" class = "inputtextbox" name = "max_amount" required>
           </div>
+
           <div class = "indiv-flex">
-            <input type = "number" placeholder="gatecode" class = "inputtextbox" required>
+            <label for="max_weight">totaal gewicht:</label>
+            <input type = "number" placeholder="max gewicht" class = "inputtextbox" name = "max_weight" required>
           </div>       
         </div>
 
         <div class = "flex-container">
           <div class = "indiv-flex">
-            <input type = "number" placeholder="max aantal" class = "inputtextbox">
+            <label for="vertrektijd">vertrektijd:</label>
+            <input type="datetime-local" id="vertrektijd" name="departure_time" class = "inputtextbox" required>
           </div>
 
           <div class = "indiv-flex">
-            <input type = "number" placeholder="max gewicht per persoon" class = "inputtextbox">
+            <label for="maatschappijcode">maatschappij:</label>
+            <select id= "maatschappij" name = "maatschappij" class = "inputtextbox" required>
+              <?php echo choices('select naam from Maatschappij'); ?>
+            </select>
           </div>       
         </div>
-
-          <label for="vertrektijd">vertrektijd:</label>
-          <input type="datetime-local" id="vertrektijd" name="vertrektijd" class = "inputtextbox" required>
 
         <button class = "inputtextbox">submit</button>
-        </form>
+      </form>
 
-      </div>
+    </div>
 
 
 
@@ -196,20 +161,27 @@
           Voer een nieuwe passagier in
         </h2>
 
-        <form action="new_passenger" method="get">
+        <form action="components/handleNewPassenger.php" method="post">
           <div class = "flex-container">
             <div class = "indiv-flex">
-              <input type = "text" placeholder="naam" class = "inputtextbox" required>
+              <input type = "text" placeholder="naam" name= "naam" class = "inputtextbox" required>
             </div>
 
             <div class = "indiv-flex">
-              <input type = "text" placeholder="vlucht bagage" class = "inputtextbox" required>
+              <input type = "number" placeholder="vluchtnummer" name = "vluchtnummer" class = "inputtextbox" required>
+            </div>
+          </div>
+
+          <div class = "flex-container">
+            <div class = "indiv-flex">
+              <input type = "text" placeholder="stoel" name= "stoelcode" class = "inputtextbox" required>
             </div>
 
             <div class = "indiv-flex">
-              <select id="geslacht" name="geslacht-list" class = "inputtextbox">
-                <option value="man">man</option>
-                <option value="vrouw">vrouw</option>
+              <select id="geslacht" name="geslacht" class = "inputtextbox">
+                <option value="M">man</option>
+                <option value="V">vrouw</option>
+                <option value="x">anders</option>
               </select>
             </div>
           </div>
@@ -222,64 +194,7 @@
 
 
 
-    <footer>
-      <div class = "flex-container">
-          <div class = "indiv-flex">
-              <h2>
-                  contact us
-              </h2>
-
-              <div class = "flex-container">
-                  <div class = "indiv-flex">
-                      <h3>
-                          email-adres
-                      </h3>
-                      <p>
-                          us@gmail.com
-                      </p>
-                  </div>
-
-                  <div class = "indiv-flex">
-                      <h3>
-                          telefoonnummer
-                      </h3>
-                      <p>
-                          0314-000000
-                      </p>
-                  </div>
-
-                  <div class = "indiv-flex">
-                      <h3>
-                          adres
-                      </h3>
-                      <p>
-                          ruitenberglaan 26 arnhem
-                      </p>
-                  </div>
-              </div>
-
-          </div>
-
-          <div class = "indiv-flex">
-              <h3>information</h3>
-              <p>about us</p>
-
-              <a href = "privacyverklaring.php">
-                  <p>privacy policy</p>
-              </a>
-              
-              
-              <p>contact us</p>
-
-
-
-          </div>
-      </div>
-
-      <p>
-          copyright 2022 Gelre Airport
-      </p>
-  </footer>
+    <?php echo getFooter(); ?>
 
   </body>
 </html>
